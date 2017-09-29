@@ -16,15 +16,19 @@ Scanner scan = new Scanner(System.in);
 		int thirdBowl = scan.nextInt();
 		
 		if (firstBowl > twoBowl && twoBowl < thirdBowl) {
-			System.out.println("Mama bear's bowl is" + twoBowl);
+			System.out.println("Mama bear's bowl is" + twoBowl); 
 			
 		else if (twoBowl > firstBowl && firstBowl < thirdBowl)
-			System.out.println("Mama bear's bowl is" + firstBowl);
+			System.out.println("Mama bear's bowl is" + firstBowl); 
 		
 		else if (thirdBowl > twoBowl && thirdBowl < firstBowl)
-			System.out.println("Mama bear's bowl is" + thirdBowl);
+			System.out.println("Mama bear's bowl is" + thirdBowl); 
 		
 		else
 			System.out.println("Please input 3 different numbers");
-}}}
+
+		}
+		}
+	}
+
 	
