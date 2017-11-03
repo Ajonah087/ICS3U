@@ -1,5 +1,11 @@
 package jonah;
 
+/** Trident IntroProblem 3
+ *  This program accepts as input the parameters t, s, and h, and prints the appropriate trident.
+ *  October 4th, 2017
+ *  @author Aidan Jonah
+ */
+
 import java.util.Scanner;
 
 public class Trident_dots {
@@ -13,7 +19,6 @@ public class Trident_dots {
 		int s = scan.nextInt();
 		System.out.println("What is the height of the prongs?");
 		int t = scan.nextInt();
-
 
 		for (int r=0; r < t; r++) {
 				System.out.print("*");
@@ -35,21 +40,9 @@ public class Trident_dots {
 				System.out.print(" ");
 			}
 			System.out.println("*");
-		}
-		}
+		}}}		
 			
-				//System.out.print("*");
-				//for (int e=0; e < s; e++) {	
-				//System.out.print(" ");
-				//System.out.print("*");
-			}
-		
-
-
-
-
-		//for (int e=0 ; e<t; e++) 
-			//System.out.println();
+			
 
 
 

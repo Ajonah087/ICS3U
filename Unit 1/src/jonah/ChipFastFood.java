@@ -1,4 +1,12 @@
 package jonah;
+
+/** ChipFastFood IntroProblem 4
+ *  The program takes the input, a number, for each type of item then calculate and display the calorie total.
+ *  October 4th, 2017
+ *  @author Aidan Jonah
+ */
+
+
 import java.util.Scanner;
 
 public class ChipFastFood {
