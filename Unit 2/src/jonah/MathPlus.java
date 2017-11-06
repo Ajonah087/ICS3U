@@ -21,6 +21,7 @@ public class MathPlus {
 
 	}
 
+	
 	/**
 	 * Subtracts num1 by num2
 	 * 
