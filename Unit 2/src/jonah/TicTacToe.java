@@ -31,10 +31,16 @@ public class TicTacToe {
 
 			gameSpaces[row-1][column-1]= specSpace;
 			int arrayXY= (specSpace);
-
-
-
 		}
+		
+		if (truth==false) {
+			System.out.println("This spot has already been selected");
+		}
+		
+		else if (ans==true) {
+			System.out.println("You have won the game!");
+		}
+	
 	}
 	
 
@@ -42,14 +48,32 @@ public class TicTacToe {
 	public static boolean gameSpacesX (int row, int column) {
 		boolean truth= false;
 		int [][] gameSpaces = new int[3][3];
-		if (gameSpaces[row][column] == null) {
+		if (gameSpaces[row][column] == 0) {
 			truth=true;
-		gameSpaces[row-1][column-1]= 'X';
-		System.out.println();
+			gameSpaces[row-1][column-1] = 'X';
+		if (gameSpaces[row-1][column-1] != 0) {
+			System.out.println("This spot has already been selected");
+			truth=false;
 		}
-
+		}
+		return truth;
 	}
 
+	public static boolean gameSpacesY (int row, int column) {
+		boolean truth= false;
+		int [][] gameSpaces = new int[3][3];
+		if (gameSpaces[row][column] == 0) {
+			truth=true;
+
+		if (gameSpaces[row-1][column-1] != 0) {
+			gameSpaces[row-1][column-1] = 'Y';
+			System.out.println("This spot has already been selected");
+			truth=false;
+
+		}
+		}
+		return truth;
+	}
 
 	public static boolean noSame (String [][] gameSpaces) {
 		boolean ans=false;
@@ -70,7 +94,9 @@ public class TicTacToe {
 				ans=true;
 				break;
 			}
-
+			else {
+				ans=false;
+			}
 		}  return ans;
 	}
 }
