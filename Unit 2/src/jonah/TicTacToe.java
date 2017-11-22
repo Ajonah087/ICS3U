@@ -23,24 +23,49 @@ public class TicTacToe {
 		int turn=0;
 
 
-		for (int i=0; i < gameSpaces.length; i++) {
+		for (int i=0; i < 5; i++) {
 			System.out.println("Starting with X, input the row and column you have chosen");
 			int row = scan.nextInt();
 			int column= scan.nextInt();
 			specSpace=0;
-
+			
 			gameSpaces[row-1][column-1]= specSpace;
 			int arrayXY= (specSpace);
-		}
+			boolean checkX = gameSpacesX(row,column);
+			boolean checkY = gameSpacesY(row,column);
 		
-		if (truth==false) {
+		if (gameSpacesX(row,column)==false) {
 			System.out.println("This spot has already been selected");
 		}
-		
-		else if (ans==true) {
-			System.out.println("You have won the game!");
+		else if (gameSpacesX(row,column)==true) {
+			
 		}
-	
+			
+		if (gameSpacesY(row,column)==false) {
+			System.out.println("This spot has already been selected");
+		}
+		else if (gameSpacesY(row,column)==true) {
+			
+		}
+		
+		for (int e=0; e< gameSpaces.length; e++) {
+			if (noSame(gameSpaces)==true) {
+				System.out.println("You have won the game!");
+			}
+		}
+		}
+//		if (truth==false) {
+//			System.out.println("This spot has already been selected");
+//		}
+//		
+//		else if (ans==true) {
+//			System.out.println("You have won the game!");
+//		}
+//		else {
+//			
+//		}
+//		
+//		}
 	}
 	
 
@@ -75,7 +100,7 @@ public class TicTacToe {
 		return truth;
 	}
 
-	public static boolean noSame (String [][] gameSpaces) {
+	public static boolean noSame (int[][] gameSpaces) {
 		boolean ans=false;
 		for (int i=0; i < gameSpaces.length; i++) {
 			if ((gameSpaces[i][0]==gameSpaces[i][1] && gameSpaces[i][1]==gameSpaces[i][2])) {
@@ -95,11 +120,22 @@ public class TicTacToe {
 				break;
 			}
 			else {
+				if ((gameSpaces[0][0]==gameSpaces[1][1] && gameSpaces[2][2]==gameSpaces[1][1])) {
+					ans=true;
+					break;
+				}
+			else if ((gameSpaces[2][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[0][2])) {
+					ans=true;
+					break;
+			}
+			else {
 				ans=false;
 			}
-		}  return ans;
+				
+		}
 	}
+		return ans;
 }
-
+}
 
 
