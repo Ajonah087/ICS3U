@@ -790,16 +790,19 @@ public class MathPlus {
 //		int perms= (int) permut(integerA,integerB);
 //		System.out.println(perms);
 		
-		
+	// This asks the user to input two integers and gives you the permutation of the two numbers
 //		System.out.println("Please input an integer");
 //		int integerN= scan.nextInt();
 //		System.out.println("Please input another integer");
 //		int integerR= scan.nextInt();
+	// This takes the two integers and sends them to the method
 //		int perm= (int) permut(integerN,integerR);
 //		System.out.println(perm);
-		
+	
+	// This asks the user for the length of the array, sends it to the method, and gets	the indice in the array which holds the median value
 //		System.out.println("How long do you want the array to be?");
 //		double medians= scan.nextDouble();
+	// This set the length of the array by the value of the variable, medians
 //		double[] arrayMedian = new double [(int)medians];
 //		for (int i=0; i < arrayMedian.length; i++) {
 //			System.out.println("Please input a number to compare");
@@ -808,14 +811,17 @@ public class MathPlus {
 //	double arrayMed= mean(arrayMedian);
 //	System.out.println(arrayMed);
 	
+	//	This asks the user for the value of double A,B,C and puts it through the quadratic equation and returns the roots
 //			System.out.println("What is the value of A?");
 //			double a= scan.nextDouble();
 //			System.out.println("What is the value of B?");
 //			double b= scan.nextDouble();
 //			System.out.println("What is the value of C?");
 //			double c= scan.nextDouble();
+		// This takes the values of a,b,c and stores them in this variables and sends them to the Quadratic method
 //			double [] arrayQuadratic= Quadratic(a,b,c);
 //			
+		// This is testing the Quadratic method for any ArithmeticExceptions and printing the set message if it is found
 //			try {
 //				double [] roots= Quadratic(a,b,c);
 //					for (int i=0; i<roots.length;i++) {
@@ -827,11 +833,13 @@ public class MathPlus {
 //			}
 //			
 
+		// This asks the user for the length of the array, sends it to the method, and gets the mean of the array 
 //		if (typeChoice.equalsIgnoreCase("double")) {
 //						System.out.println("How long do you want the array to be?");
 //						double means= scan.nextDouble();
 //						double[] arrayMean = new double [(int)means];
 //						
+		// This takes the length of the array and makes the For loop go until, variable i, until it's one less to the length of arrayMean 
 //						for (int i=0; i < arrayMean.length; i++) {
 //											System.out.println("Please input a number to compare");
 //											arrayMean[i]= scan.nextDouble();
@@ -839,6 +847,7 @@ public class MathPlus {
 //									double arrayMe= mean(arrayMean);
 //									System.out.println("The average of all the values in the array is " + arrayMe);
 		
+		// 
 //		if (typeChoice.equalsIgnoreCase("double")) {
 //			System.out.println("How long do you want the array to be?");
 //			double mode= scan.nextDouble();
@@ -849,6 +858,7 @@ public class MathPlus {
 //								arrayMode[i]= scan.nextDouble();
 //			}
 //						double arrayMo= mode(arrayMode);
+		// This prints the average value of the array, which was sent back to it through the return function 
 //						System.out.println(arrayMo);
 		
 //		if (typeChoice.equalsIgnoreCase("int")) {
