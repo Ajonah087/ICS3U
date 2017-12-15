@@ -24,6 +24,7 @@ public class TicTacToe {
 		boolean checkX = true;
 		boolean checkY = true;
 
+		
 
 		System.out.print("Is X, or O, starting off the tic-tac-toe game?");
 		turn=scan.next().charAt(0);
