@@ -21,19 +21,23 @@ public class TicTacToe {
 		char [][] gameSpaces = new char [3][3];
 		char specSpace;
 		char turn='X'; 
-		boolean checkX = true;
-		boolean checkY = true;
+		boolean checkX = false;
+		boolean checkY = false;
 
 		
 
 		System.out.print("Is X, or O, starting off the tic-tac-toe game?");
 		turn=scan.next().charAt(0);
 		
-		for (int i=0; i < 5; i++) {
-			while (checkX || checkY == false ) {
+		do{
+			int row = 0;
+			int column = 0;
+			while (checkX  == false || checkY == false ) {
+				checkX = true;
+				checkY = true;
 				System.out.println("Starting with " + turn + " input the row and column you have chosen, pick number between 1-3");
-				int row = scan.nextInt();
-				int column= scan.nextInt();
+				row = scan.nextInt();
+				column= scan.nextInt();
 
 				if (turn == 'X') {
 					checkX = gameSpacesX(row,column,gameSpaces);
@@ -48,6 +52,9 @@ public class TicTacToe {
 				if (checkY==false) {
 					System.out.println("This spot has already been selected");
 				}
+
+			}
+
 				if (turn=='X') {
 					turn='O';
 					printBoard(gameSpaces,row,column);
@@ -55,42 +62,20 @@ public class TicTacToe {
 				else {
 					turn='X';
 					printBoard(gameSpaces,row,column);
-				}	
-			}
+				}
+				checkX = false;
+				checkY = false;
+		}while(!noSame(gameSpaces));				
 
 
-		}				
-		//end do...while loop
-
-
-
-
-
-		for (int a=0; a< gameSpaces.length; a++) {
-			if (noSame(gameSpaces)==true) {
-				System.out.println("You have won the game!");
-			}
-			else {
-
-			}
+		if(turn == 'O') {
+			System.out.println("Game Over! X Won");
+		}
+		else {
+			System.out.println("Game Over! O Won");
 		}
 
-
-
-
 	}
-	//		if (truth==false) {
-	//			System.out.println("This spot has already been selected");
-	//		}
-	//		
-	//		else if (ans==true) {
-	//			System.out.println("You have won the game!");
-	//		}
-	//		else {
-	//			
-	//		}
-	//		
-	//		}
 
 
 
@@ -109,9 +94,6 @@ public class TicTacToe {
 		else  {
 			System.out.println("This spot has already been selected");
 			truth=false;
-			if (noSame(gameSpaces)==true) {
-				System.out.println("You have won the game!");
-			}
 		}
 
 		return truth;
@@ -126,20 +108,18 @@ public class TicTacToe {
 		else  {
 			System.out.println("This spot has already been selected");
 			truth=false;
-			if (noSame(gameSpaces)==true) {
-				System.out.println("You have won the game!");
-			}
 		}
 		return truth;
 	}
+	
 
 	public static void printBoard (char [][] gameSpaces,int row, int column) {
 
-		System.out.println("_" + gameSpaces[0][0] + "_" + gameSpaces[0][1] + "_" + gameSpaces[0][2]);
-		System.out.println("____________");
-		System.out.println("_" + gameSpaces[1][0] + "_" + gameSpaces[1][1] + "_" + gameSpaces[1][2]);
-		System.out.println("____________");
-		System.out.println("_" + gameSpaces[2][0] + "_" + gameSpaces[2][1] + "_" + gameSpaces[2][2]);
+		System.out.println(gameSpaces[0][0] + "   |   " + gameSpaces[0][1] + "   |   " + gameSpaces[0][2]);
+		System.out.println("____________________");
+		System.out.println(gameSpaces[1][0] + "   |   " + gameSpaces[1][1] + "   |   " + gameSpaces[1][2]);
+		System.out.println("____________________");
+		System.out.println(gameSpaces[2][0] + "   |   " + gameSpaces[2][1] + "   |   "+ gameSpaces[2][2]);
 
 
 
@@ -148,29 +128,30 @@ public class TicTacToe {
 	public static boolean noSame (char [][] gameSpaces) {
 		boolean ans=false;
 		for (int i=0; i < gameSpaces.length; i++) {
-			if ((gameSpaces[i][0]==gameSpaces[i][1] && gameSpaces[i][1]==gameSpaces[i][2])) {
+			if ((gameSpaces[1][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[1][2]) && gameSpaces[1][0]!='\u0000') {
+				
 				ans=true;
 				break;
 			}
-			else if ((gameSpaces[0][i]==gameSpaces[1][i] && gameSpaces[1][i]==gameSpaces[2][i])) {
+			else if ((gameSpaces[0][1]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[2][1])&& gameSpaces[2][1]!='\u0000') {
 				ans=true;
 				break;
 			}
-			else if ((gameSpaces[0][0]==gameSpaces[1][1] && gameSpaces[2][2]==gameSpaces[1][1])) {
+			else if ((gameSpaces[0][0]==gameSpaces[1][1] && gameSpaces[2][2]==gameSpaces[1][1])&& gameSpaces[2][2]!='\u0000') {
 				ans=true;
 				break;
 			}
-			else if ((gameSpaces[2][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[0][2])) {
+			else if ((gameSpaces[2][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[0][2])&& gameSpaces[0][2]!='\u0000') {
 				ans=true;
 				break;
 			}
 			else {
-				if ((gameSpaces[0][0]==gameSpaces[1][1] && gameSpaces[2][2]==gameSpaces[1][1])) {
+				if ((gameSpaces[0][0]==gameSpaces[1][1] && gameSpaces[2][2]==gameSpaces[1][1])&& gameSpaces[1][1]!='\u0000') {
 					ans=true;
 					break;
 				}
-				else if ((gameSpaces[2][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[0][2])) {
-					ans=true;
+				else if ((gameSpaces[2][0]==gameSpaces[1][1] && gameSpaces[1][1]==gameSpaces[0][2])&& gameSpaces[2][0]!='\u0000') {
+				ans=true;
 					break;
 				}
 				else {
@@ -179,7 +160,7 @@ public class TicTacToe {
 
 			}
 		}
-		return ans;
+	return ans;
 	}
 
 
