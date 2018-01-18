@@ -11,6 +11,7 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3GyroSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 
+
 /**
  * @author 343057964
  *
@@ -18,8 +19,8 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 public class CulminatingAssignment_AidanJonah {
 
 	/**
-	 * @param args
-	 * @throws InterruptedException 
+	 * This method is used to have a robot get through a maze, making decisions about how fast and where to turn as the robot makes its' way through the maze 
+	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		EV3LargeRegulatedMotor rightMotor= new EV3LargeRegulatedMotor(MotorPort.C);
@@ -34,6 +35,10 @@ public class CulminatingAssignment_AidanJonah {
 		maintainDistance(rightMotor,leftMotor,sonar,gyro,colour);
 	}
 	
+	/**
+	 * This method ensures that the robot utilises the ColorCheck Method when the EV3UltrasonicSensor senses that a wall is less than 5 cm away
+	 * @throws InterruptedException
+	 */
 	public static void maintainDistance(EV3LargeRegulatedMotor rightMotor, EV3LargeRegulatedMotor leftMotor, EV3UltrasonicSensor sonar, EV3GyroSensor gyro, EV3ColorSensor colour) throws InterruptedException{
 		float [] distances = new float[1];
 		sonar.fetchSample(distances,0);
@@ -42,6 +47,11 @@ public class CulminatingAssignment_AidanJonah {
 		}
 	}
 
+	
+	/**
+	 * This method ensures that the robot determines what colour the wall is and determine what speed & direction the robot goes in
+	 * @throws InterruptedException
+	 */
 	public static void colorCheck(EV3LargeRegulatedMotor rightMotor, EV3LargeRegulatedMotor leftMotor, EV3UltrasonicSensor sonar, EV3GyroSensor gyro, EV3ColorSensor colour) throws InterruptedException{	
 		float [] sample = new float[1];
 		colour.getColorIDMode().fetchSample(sample,0);
