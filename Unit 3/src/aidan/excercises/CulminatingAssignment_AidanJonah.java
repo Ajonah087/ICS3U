@@ -45,6 +45,12 @@ public class CulminatingAssignment_AidanJonah {
 		if (distances[0] < 0.05) {
 			colorCheck(rightMotor, leftMotor, sonar, gyro, colour);
 		}
+		
+		else if (distances[0] > 0.05) {
+			rightMotor.forward();
+			leftMotor.forward();
+			Thread.sleep(400);
+		}
 	}
 
 	
@@ -56,14 +62,16 @@ public class CulminatingAssignment_AidanJonah {
 		float [] sample = new float[1];
 		colour.getColorIDMode().fetchSample(sample,0);
 		
-		if (sample[0]== -1) {
-			rightMotor.forward();
-			leftMotor.forward();
-			Thread.sleep(250);
-		}
+		// go forward
+//		if (sample[0]== -1) {
+//			rightMotor.forward();
+//			leftMotor.forward();
+//			Thread.sleep(250);
+//		}
 		
-		
-		else if (sample[0]==3) {
+		// turn to right
+		//yellow
+		if (sample[0]==3) {
 			rightMotor.setSpeed(500);
 			leftMotor.setSpeed(200);
 			
@@ -72,6 +80,9 @@ public class CulminatingAssignment_AidanJonah {
 			Thread.sleep(250);
 		}
 		
+		
+		// go backwards and turn right
+		// green
 		else if (sample[0]==1) {
 			rightMotor.setSpeed(250);
 			leftMotor.setSpeed(250);
@@ -86,6 +97,8 @@ public class CulminatingAssignment_AidanJonah {
 			Thread.sleep(350);
 		}
 		
+		// go left
+		// Blue
 		else if(sample[0]==2) {
 			rightMotor.setSpeed(200);
 			leftMotor.setSpeed(500);
@@ -95,7 +108,9 @@ public class CulminatingAssignment_AidanJonah {
 			Thread.sleep(250);
 		}
 		
-		else if(sample[0]==6) {
+		// go back and left
+		// red
+		else if(sample[0]==0) {
 			rightMotor.setSpeed(250);
 			leftMotor.setSpeed(250);
 			rightMotor.backward();
