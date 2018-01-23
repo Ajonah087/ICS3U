@@ -10,6 +10,8 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3GyroSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
+import lejos.robotics.Color;
+import lejos.utility.Delay;
 
 
 /**
@@ -25,14 +27,16 @@ public class CulminatingAssignment_AidanJonah {
 	public static void main(String[] args) throws InterruptedException {
 		EV3LargeRegulatedMotor rightMotor= new EV3LargeRegulatedMotor(MotorPort.C);
 		EV3LargeRegulatedMotor leftMotor= new EV3LargeRegulatedMotor(MotorPort.B);
-		EV3UltrasonicSensor sonar = new EV3UltrasonicSensor(SensorPort.S4);
-		EV3GyroSensor gyro= new EV3GyroSensor(SensorPort.S1);
-		EV3ColorSensor colour = new EV3ColorSensor(SensorPort.S3);
+		EV3UltrasonicSensor sonar = new EV3UltrasonicSensor(SensorPort.S1);
+		EV3GyroSensor gyro= new EV3GyroSensor(SensorPort.S3);
+		EV3ColorSensor colour = new EV3ColorSensor(SensorPort.S4);
 		System.out.println("Press the square button to start the maze runner program.");
 		Button.waitForAnyPress();
-		rightMotor.forward();
-		leftMotor.forward();
+//		rightMotor.forward();
+//		leftMotor.forward();
+//		Thread.sleep(1750);
 		maintainDistance(rightMotor,leftMotor,sonar,gyro,colour);
+		Thread.sleep(2500);
 	}
 	
 	/**
@@ -41,18 +45,44 @@ public class CulminatingAssignment_AidanJonah {
 	 */
 	public static void maintainDistance(EV3LargeRegulatedMotor rightMotor, EV3LargeRegulatedMotor leftMotor, EV3UltrasonicSensor sonar, EV3GyroSensor gyro, EV3ColorSensor colour) throws InterruptedException{
 		float [] distances = new float[1];
-		sonar.fetchSample(distances,0);
-		if (distances[0] < 0.05) {
-			colorCheck(rightMotor, leftMotor, sonar, gyro, colour);
-		}
-		
-		else if (distances[0] > 0.05) {
+		sonar.getDistanceMode().fetchSample(distances,0);
+		do {
 			rightMotor.forward();
 			leftMotor.forward();
-			Thread.sleep(400);
-		}
+			System.out.println(distances[0]);
+			sonar.getDistanceMode().fetchSample(distances,0);
+			if (distances[0] < 0.04) {
+				leftMotor.stop(true);
+				rightMotor.stop(true);
+				leftMotor.backward();
+				rightMotor.backward();
+				Thread.sleep(10);
+				colorCheck(rightMotor, leftMotor, sonar,gyro, colour);
+				Thread.sleep(5);
+			}
+			Delay.msDelay(16);
+			
+		}while (distances[0] > 0.04); 
+			
+			
+		
+		
 	}
-
+		
+//	}
+//
+//	
+//	if (distances[0] < 0.05) {
+//		leftMotor.stop(true);
+//		rightMotor.stop(true);
+//		colorCheck(rightMotor, leftMotor, sonar,colour);
+//	}
+//	
+//	else if (distances[0] > 0.05) {
+//		rightMotor.forward();
+//		leftMotor.forward();
+//	}
+//}
 	
 	/**
 	 * This method ensures that the robot determines what colour the wall is and determine what speed & direction the robot goes in
@@ -61,6 +91,7 @@ public class CulminatingAssignment_AidanJonah {
 	public static void colorCheck(EV3LargeRegulatedMotor rightMotor, EV3LargeRegulatedMotor leftMotor, EV3UltrasonicSensor sonar, EV3GyroSensor gyro, EV3ColorSensor colour) throws InterruptedException{	
 		float [] sample = new float[1];
 		colour.getColorIDMode().fetchSample(sample,0);
+		
 		
 		// go forward
 //		if (sample[0]== -1) {
@@ -71,46 +102,49 @@ public class CulminatingAssignment_AidanJonah {
 		
 		// turn to right
 		//yellow
-		if (sample[0]==3) {
+		if (sample[0]==Color.YELLOW) {
 			rightMotor.setSpeed(500);
 			leftMotor.setSpeed(200);
-			
+			//leftMotor.rotate(90);
 			rightMotor.forward();
 			leftMotor.forward();
+			//leftMotor.rotate();
 			Thread.sleep(250);
-		}
-		
+			System.out.println(Color.YELLOW);
+		}		
 		
 		// go backwards and turn right
 		// green
-		else if (sample[0]==1) {
-			rightMotor.setSpeed(250);
-			leftMotor.setSpeed(250);
-			
-			rightMotor.backward();
-			leftMotor.backward();
-			Thread.sleep(250);
-			rightMotor.setSpeed(500);
-			leftMotor.setSpeed(200);
-			rightMotor.forward();
-			leftMotor.forward();
-			Thread.sleep(350);
-		}
-		
+//		else if (sample[0]==Color.GREEN) {
+//			rightMotor.setSpeed(250);
+//			leftMotor.setSpeed(250);
+//			
+//			rightMotor.backward();
+//			leftMotor.backward();
+//			Thread.sleep(250);
+//			rightMotor.setSpeed(500);
+//			leftMotor.setSpeed(200);
+//			rightMotor.forward();
+//			leftMotor.forward();
+//			Thread.sleep(350);
+//			System.out.println(Color.GREEN);
+//		}
 		// go left
 		// Blue
-		else if(sample[0]==2) {
-			rightMotor.setSpeed(200);
-			leftMotor.setSpeed(500);
+		else if(sample[0]==Color.GREEN) {
+			rightMotor.setSpeed(400);
+			leftMotor.setSpeed(400);
 			
-			rightMotor.forward();
+			rightMotor.rotate(90);
+			Thread.sleep(90);
 			leftMotor.forward();
+			rightMotor.forward();
 			Thread.sleep(250);
+			System.out.println(Color.GREEN);
 		}
-		
 		// go back and left
 		// red
-		else if(sample[0]==0) {
+		else if(sample[0]==Color.RED) {
 			rightMotor.setSpeed(250);
 			leftMotor.setSpeed(250);
 			rightMotor.backward();
@@ -121,6 +155,10 @@ public class CulminatingAssignment_AidanJonah {
 			rightMotor.forward();
 			leftMotor.forward();
 			Thread.sleep(350);
+			System.out.println(Color.RED);
+		}
+		else {
+			System.out.println("No colour found");
 		}
 		
 	}
