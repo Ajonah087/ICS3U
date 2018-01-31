@@ -36,8 +36,9 @@ public class CulminatingAssignment_AidanJonah {
 //		leftMotor.forward();
 //		Thread.sleep(1750);
 		maintainDistance(rightMotor,leftMotor,sonar,gyro,colour);
-		Thread.sleep(2500);
+		Thread.sleep(3500);
 	}
+	
 	
 	/**
 	 * This method ensures that the robot utilises the ColorCheck Method when the EV3UltrasonicSensor senses that a wall is less than 5 cm away
@@ -51,16 +52,16 @@ public class CulminatingAssignment_AidanJonah {
 			leftMotor.forward();
 			System.out.println(distances[0]);
 			sonar.getDistanceMode().fetchSample(distances,0);
-			if (distances[0] < 0.04) {
+			if (distances[0] < 0.05) {
 				leftMotor.stop(true);
 				rightMotor.stop(true);
-				leftMotor.backward();
-				rightMotor.backward();
-				Thread.sleep(10);
+				//leftMotor.forward();
+				//rightMotor.forward();
+				Thread.sleep(500);
 				colorCheck(rightMotor, leftMotor, sonar,gyro, colour);
 				Thread.sleep(5);
 			}
-			Delay.msDelay(16);
+			Delay.msDelay(12);
 			
 		}while (distances[0] > 0.04); 
 			
@@ -102,15 +103,14 @@ public class CulminatingAssignment_AidanJonah {
 		
 		// turn to right
 		//yellow
-		if (sample[0]==Color.YELLOW) {
+		if (sample[0]==Color.PINK) {
 			rightMotor.setSpeed(500);
 			leftMotor.setSpeed(200);
-			//leftMotor.rotate(90);
+			leftMotor.rotate(120);
 			rightMotor.forward();
 			leftMotor.forward();
-			//leftMotor.rotate();
 			Thread.sleep(250);
-			System.out.println(Color.YELLOW);
+			System.out.println(Color.PINK);
 		}		
 		
 		// go backwards and turn right
@@ -134,8 +134,11 @@ public class CulminatingAssignment_AidanJonah {
 		else if(sample[0]==Color.GREEN) {
 			rightMotor.setSpeed(400);
 			leftMotor.setSpeed(400);
-			
-			rightMotor.rotate(90);
+			leftMotor.backward();
+			rightMotor.backward();
+			Delay.msDelay(500);
+			//leftMotor.stop();
+			rightMotor.rotate(-90);
 			Thread.sleep(90);
 			leftMotor.forward();
 			rightMotor.forward();
@@ -144,18 +147,20 @@ public class CulminatingAssignment_AidanJonah {
 		}
 		// go back and left
 		// red
-		else if(sample[0]==Color.RED) {
+		else if(sample[0]==Color.YELLOW) {
 			rightMotor.setSpeed(250);
 			leftMotor.setSpeed(250);
 			rightMotor.backward();
 			leftMotor.backward();
-			Thread.sleep(250);
-			rightMotor.setSpeed(200);
+			Thread.sleep(20);
+			leftMotor.rotate(105);
+			Thread.sleep(90);
+			rightMotor.setSpeed(500);
 			leftMotor.setSpeed(500);
 			rightMotor.forward();
 			leftMotor.forward();
-			Thread.sleep(350);
-			System.out.println(Color.RED);
+			Thread.sleep(100);
+			System.out.println(Color.YELLOW);
 		}
 		else {
 			System.out.println("No colour found");
